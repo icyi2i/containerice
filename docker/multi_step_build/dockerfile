@@ -1,0 +1,10 @@
+FROM alpine:latest as build_environment
+RUN apk add gcc libc-dev
+COPY hello_world.c /tmp
+WORKDIR /tmp
+RUN gcc -o hello_world hello_world.c
+
+FROM alpine:latest as runtime_environment
+COPY --from=build_environment /tmp/hello_world /app/
+WORKDIR /app
+CMD ./hello_world
