@@ -1,0 +1,17 @@
+# Base image
+FROM python:3-alpine3.10
+
+# Copy dependencies list
+COPY app/requirements.txt /app/
+
+# Set working context to /app
+WORKDIR /app
+
+# Install required packges
+RUN pip install -r requirements.txt
+
+# Copy application folder
+COPY app /app
+
+# Add default command to run when container runs
+CMD python run.py
