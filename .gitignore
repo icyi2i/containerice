@@ -4,6 +4,9 @@ __venv__/
 .venv/
 venv/
 
+# Cache
+__pycache__/
+*.pyc
 
 # IDE
 .vscode/

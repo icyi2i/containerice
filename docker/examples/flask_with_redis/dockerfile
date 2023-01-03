@@ -1,0 +1,28 @@
+# Base image
+FROM python:3-alpine3.10
+
+# Copy dependencies list
+COPY app/requirements.txt /app/
+
+# Set working context to /app
+WORKDIR /app
+
+# Install required packges
+RUN pip install -r requirements.txt
+
+# Environment variables
+ARG REDIS_HOST
+ARG REDIS_PORT
+ARG REDIS_PASSWORD
+ARG REDIS_DATABASE
+
+ENV REDIS_HOST=${REDIS_HOST:-"flapp-red-db"}
+ENV REDIS_PORT=${REDIS_PORT:-6379}
+ENV REDIS_PASSWORD=${REDIS_PASSWORD:-""}
+ENV REDIS_DATABASE=${REDIS_DATABASE:-0}
+
+# Copy application folder
+COPY app /app
+
+# Add default command to run when container runs
+CMD python run.py

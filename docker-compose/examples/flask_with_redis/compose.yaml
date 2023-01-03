@@ -1,0 +1,29 @@
+services:
+  flapp-red-db:
+    image: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - backend-db-nw
+
+  flapp-red-app:
+    image: icyi2i/flapp-red-app:latest
+    depends_on:
+      - flapp-red-db
+    ports:
+      - "5000:5000"
+    networks:
+      - backend-api-nw
+      - backend-db-nw
+    links:
+      - "flapp-red-db:db:database"
+
+volumes:
+  db-data:
+    driver: flapp-db
+    driver_opts:
+      size: "100MiB"
+
+networks:
+  backend-api-nw: {}
+  backend-db-nw: {}

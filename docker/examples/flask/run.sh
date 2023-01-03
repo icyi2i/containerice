@@ -1,2 +1,2 @@
 #!/bin/bash
-docker run -d -p 5000:5000 --name=flapp_primary flapp:latest
+docker run -d -p 5000:5000 --name=flapp_primary icyi2i/flapp:latest
